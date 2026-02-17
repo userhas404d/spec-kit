@@ -62,6 +62,11 @@ has_git() {
     git rev-parse --show-toplevel >/dev/null 2>&1
 }
 
+# Check if we have worktrunk (wt) available
+has_wt() {
+    command -v wt >/dev/null 2>&1
+}
+
 check_feature_branch() {
     local branch="$1"
     local has_git_repo="$2"

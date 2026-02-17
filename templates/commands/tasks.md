@@ -11,7 +11,6 @@ handoffs:
     send: true
 scripts:
   sh: scripts/bash/check-prerequisites.sh --json
-  ps: scripts/powershell/check-prerequisites.ps1 -Json
 ---
 
 ## User Input

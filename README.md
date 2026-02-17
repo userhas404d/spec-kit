@@ -325,8 +325,24 @@ Our research and experimentation focus on:
 - [uv](https://docs.astral.sh/uv/) for package management
 - [Python 3.11+](https://www.python.org/downloads/)
 - [Git](https://git-scm.com/downloads)
+- [Worktrunk](https://worktrunk.dev) for worktree-based feature development (`brew install worktrunk && wt config shell install`)
 
 If you encounter issues with an agent, please open an issue so we can refine the integration.
+
+### Recommended Worktrunk Hooks
+
+Spec Kit uses [Worktrunk](https://worktrunk.dev) for worktree-based feature development. You can optionally configure project-level hooks in `.config/wt.toml` to automate common tasks:
+
+```toml
+[hooks]
+# Run dependency installation when creating a new worktree
+post-create = "uv sync"
+
+# Run test suite before merging a feature
+pre-merge = "uv run pytest"
+```
+
+Spec Kit does not auto-generate this file; configure it to suit your project's needs.
 
 ## 📖 Learn More
 
@@ -434,7 +450,7 @@ delete any comments that you made, but you can't delete comments anybody else ma
 
 After this prompt is entered, you should see Claude Code kick off the planning and spec drafting process. Claude Code will also trigger some of the built-in scripts to set up the repository.
 
-Once this step is completed, you should have a new branch created (e.g., `001-create-taskify`), as well as a new specification in the `specs/001-create-taskify` directory.
+Once this step is completed, you should have a new worktree created (e.g., `001-create-taskify`), as well as a new specification in the `specs/001-create-taskify` directory.
 
 The produced specification should contain a set of user stories and functional requirements, as defined in the template.
 

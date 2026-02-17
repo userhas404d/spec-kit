@@ -7,6 +7,33 @@ All notable changes to the Specify CLI and templates are documented here.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.0] - 2026-02-17
+
+### Added
+
+- **Worktrunk Integration**: Replaced `git checkout -b` branching with `wt switch --create` for worktree-based feature development
+  - Each feature now gets its own isolated worktree via [Worktrunk](https://worktrunk.dev)
+  - `wt` check added to `specify check` command output
+  - `wt` prerequisite warning added to `specify init` flow
+  - Added `has_wt()` helper function to `common.sh`
+
+### Changed
+
+- **Branch creation**: `create-new-feature.sh` now uses `wt switch --create` instead of `git checkout -b`
+- **Script consolidation**: Removed `--script` CLI option from `specify init` (bash-only)
+- **Command templates**: All command templates now reference only `sh:` scripts (removed `ps:` frontmatter entries)
+- **Prerequisites**: Updated README and CONTRIBUTING docs to list Worktrunk as a prerequisite
+
+### Removed
+
+- **PowerShell scripts**: Removed all `.ps1` scripts (`common.ps1`, `create-new-feature.ps1`, `setup-plan.ps1`, `check-prerequisites.ps1`, `update-agent-context.ps1`). Worktrunk is a cross-platform Rust binary; bash scripts run via Git Bash on Windows or WSL.
+- **Script type selection**: Removed `SCRIPT_TYPE_CHOICES` and the interactive script-type picker from `specify init`
+
+### Breaking Changes
+
+- PowerShell script support has been removed. Windows users should use Git Bash or WSL.
+- The `--script` option on `specify init` no longer exists.
+
 ## [0.1.0] - 2026-01-28
 
 ### Added

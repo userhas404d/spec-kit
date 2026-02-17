@@ -11,6 +11,7 @@ These are one time installations required to be able to test your changes locall
 1. Install [Python 3.11+](https://www.python.org/downloads/)
 1. Install [uv](https://docs.astral.sh/uv/) for package management
 1. Install [Git](https://git-scm.com/downloads)
+1. Install [Worktrunk](https://worktrunk.dev) for worktree-based feature development: `brew install worktrunk && wt config shell install`
 1. Have an [AI coding agent available](README.md#-supported-ai-agents)
 
 <details>
@@ -38,7 +39,7 @@ On [GitHub Codespaces](https://github.com/features/codespaces) it's even simpler
 1. Fork and clone the repository
 1. Configure and install the dependencies: `uv sync`
 1. Make sure the CLI works on your machine: `uv run specify --help`
-1. Create a new branch: `git checkout -b my-branch-name`
+1. Create a new worktree: `wt switch --create my-branch-name`
 1. Make your change, add tests, and make sure everything still works
 1. Test the CLI functionality with a sample project if relevant
 1. Push to your fork and submit a pull request

@@ -14,6 +14,14 @@ The toolkit supports multiple AI coding assistants, allowing teams to use their 
 
 - Any changes to `__init__.py` for the Specify CLI require a version rev in `pyproject.toml` and addition of entries to `CHANGELOG.md`.
 
+## Branching Strategy
+
+Spec-kit uses [Worktrunk](https://worktrunk.dev) (`wt`) for worktree-based feature development. Each feature gets its own isolated worktree via `wt switch --create ###-feature-name`, preserving the `###-feature-name` numbering convention. The `wt` binary is cross-platform (Rust), so bash scripts run on all platforms (via Git Bash on Windows or WSL).
+
+- **Create a feature**: `wt switch --create ###-feature-name` (replaces `git checkout -b`)
+- **Merge/cleanup**: Use `wt merge` or `wt remove` manually
+- **PowerShell scripts removed**: All scripts are bash-only; `wt` handles cross-platform concerns
+
 ## Adding New Agent Support
 
 This section explains how to add support for new AI agents/assistants to the Specify CLI. Use this guide as a reference when integrating new AI tools into the Spec-Driven Development workflow.
