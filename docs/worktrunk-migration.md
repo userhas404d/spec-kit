@@ -25,21 +25,21 @@ With Worktrunk handling cross-platform concerns as a compiled Rust binary, maint
 
 ### Branching
 
-| Before                          | After                            |
-| ------------------------------- | -------------------------------- |
-| `git checkout -b 001-feature`   | `wt switch --create 001-feature` |
-| Single working directory        | Isolated worktree per feature    |
-| `git fetch --all --prune` scan  | Removed (unnecessary with `wt`)  |
+| Before                         | After                            |
+| ------------------------------ | -------------------------------- |
+| `git checkout -b 001-feature`  | `wt switch --create 001-feature` |
+| Single working directory       | Isolated worktree per feature    |
+| `git fetch --all --prune` scan | Removed (unnecessary with `wt`)  |
 
 ### Scripts
 
-| Action                     | Before                                    | After                                   |
-| -------------------------- | ----------------------------------------- | --------------------------------------- |
-| Create feature             | `create-new-feature.sh` / `.ps1`          | `create-new-feature.sh` (bash only)     |
-| Common helpers             | `common.sh` / `common.ps1`               | `common.sh` + new `has_wt()` function   |
-| Setup plan                 | `setup-plan.sh` / `.ps1`                 | `setup-plan.sh` (bash only)             |
-| Check prerequisites        | `check-prerequisites.sh` / `.ps1`        | `check-prerequisites.sh` (bash only)    |
-| Update agent context       | `update-agent-context.sh` / `.ps1`       | `update-agent-context.sh` (bash only)   |
+| Action               | Before                             | After                                 |
+| -------------------- | ---------------------------------- | ------------------------------------- |
+| Create feature       | `create-new-feature.sh` / `.ps1`   | `create-new-feature.sh` (bash only)   |
+| Common helpers       | `common.sh` / `common.ps1`         | `common.sh` + new `has_wt()` function |
+| Setup plan           | `setup-plan.sh` / `.ps1`           | `setup-plan.sh` (bash only)           |
+| Check prerequisites  | `check-prerequisites.sh` / `.ps1`  | `check-prerequisites.sh` (bash only)  |
+| Update agent context | `update-agent-context.sh` / `.ps1` | `update-agent-context.sh` (bash only) |
 
 ### CLI (`specify`)
 

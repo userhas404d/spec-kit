@@ -1,61 +1,61 @@
 name: Sync Upstream
 
 on:
-  schedule:
-    # Run daily at 06:00 UTC
-    - cron: '0 6 * * *'
-  workflow_dispatch:
+    schedule:
+        # Run daily at 06:00 UTC
+        - cron: "0 6 * * *"
+    workflow_dispatch:
 
 permissions:
-  contents: write
-  pull-requests: write
+    contents: write
+    pull-requests: write
 
 jobs:
-  sync:
-    runs-on: ubuntu-latest
-    outputs:
-      main_updated: ${{ steps.sync.outputs.main_updated }}
-      worktrunk_synced: ${{ steps.sync.outputs.worktrunk_synced }}
-      pr_created: ${{ steps.sync.outputs.pr_created }}
-      pr_url: ${{ steps.sync.outputs.pr_url }}
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-          token: ${{ secrets.SYNC_TOKEN }}
-          # Checkout worktrunk (default branch) so workflow scripts are available
-          ref: worktrunk
+    sync:
+        runs-on: ubuntu-latest
+        outputs:
+            main_updated: ${{ steps.sync.outputs.main_updated }}
+            worktrunk_synced: ${{ steps.sync.outputs.worktrunk_synced }}
+            pr_created: ${{ steps.sync.outputs.pr_created }}
+            pr_url: ${{ steps.sync.outputs.pr_url }}
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v4
+              with:
+                  fetch-depth: 0
+                  token: ${{ secrets.SYNC_TOKEN }}
+                  # Checkout worktrunk (default branch) so workflow scripts are available
+                  ref: worktrunk
 
-      - name: Fetch main branch
-        run: |
-          git fetch origin main:main
+            - name: Fetch main branch
+              run: |
+                  git fetch origin main:main
 
-      - name: Configure git identity
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            - name: Configure git identity
+              run: |
+                  git config user.name "github-actions[bot]"
+                  git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-      - name: Run upstream sync
-        id: sync
-        run: |
-          chmod +x .github/workflows/scripts/sync-upstream.sh
-          .github/workflows/scripts/sync-upstream.sh
-        env:
-          GITHUB_TOKEN: ${{ secrets.SYNC_TOKEN }}
-          UPSTREAM_REPO: https://github.com/github/spec-kit.git
-          TARGET_BRANCH: worktrunk
+            - name: Run upstream sync
+              id: sync
+              run: |
+                  chmod +x .github/workflows/scripts/sync-upstream.sh
+                  .github/workflows/scripts/sync-upstream.sh
+              env:
+                  GITHUB_TOKEN: ${{ secrets.SYNC_TOKEN }}
+                  UPSTREAM_REPO: https://github.com/github/spec-kit.git
+                  TARGET_BRANCH: worktrunk
 
-      - name: Summary
-        if: always()
-        run: |
-          echo "## Sync Upstream Results" >> "$GITHUB_STEP_SUMMARY"
-          echo "" >> "$GITHUB_STEP_SUMMARY"
-          echo "| Output | Value |" >> "$GITHUB_STEP_SUMMARY"
-          echo "|--------|-------|" >> "$GITHUB_STEP_SUMMARY"
-          echo "| main updated | \`${{ steps.sync.outputs.main_updated }}\` |" >> "$GITHUB_STEP_SUMMARY"
-          echo "| worktrunk synced | \`${{ steps.sync.outputs.worktrunk_synced }}\` |" >> "$GITHUB_STEP_SUMMARY"
-          echo "| PR created | \`${{ steps.sync.outputs.pr_created }}\` |" >> "$GITHUB_STEP_SUMMARY"
-          if [[ -n "${{ steps.sync.outputs.pr_url }}" ]]; then
-            echo "| PR URL | ${{ steps.sync.outputs.pr_url }} |" >> "$GITHUB_STEP_SUMMARY"
-          fi
+            - name: Summary
+              if: always()
+              run: |
+                  echo "## Sync Upstream Results" >> "$GITHUB_STEP_SUMMARY"
+                  echo "" >> "$GITHUB_STEP_SUMMARY"
+                  echo "| Output | Value |" >> "$GITHUB_STEP_SUMMARY"
+                  echo "|--------|-------|" >> "$GITHUB_STEP_SUMMARY"
+                  echo "| main updated | \`${{ steps.sync.outputs.main_updated }}\` |" >> "$GITHUB_STEP_SUMMARY"
+                  echo "| worktrunk synced | \`${{ steps.sync.outputs.worktrunk_synced }}\` |" >> "$GITHUB_STEP_SUMMARY"
+                  echo "| PR created | \`${{ steps.sync.outputs.pr_created }}\` |" >> "$GITHUB_STEP_SUMMARY"
+                  if [[ -n "${{ steps.sync.outputs.pr_url }}" ]]; then
+                    echo "| PR URL | ${{ steps.sync.outputs.pr_url }} |" >> "$GITHUB_STEP_SUMMARY"
+                  fi
