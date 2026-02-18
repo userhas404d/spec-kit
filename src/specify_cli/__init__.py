@@ -734,7 +734,7 @@ def download_template_from_github(
     debug: bool = False,
     github_token: str = None,
 ) -> Tuple[Path, dict]:
-    repo_owner = "github"
+    repo_owner = "userhas404d"
     repo_name = "spec-kit"
     if client is None:
         client = httpx.Client(verify=ssl_context)
@@ -1606,7 +1606,7 @@ def version():
             pass
 
     # Fetch latest template release version
-    repo_owner = "github"
+    repo_owner = "userhas404d"
     repo_name = "spec-kit"
     api_url = f"https://api.github.com/repos/{repo_owner}/{repo_name}/releases/latest"
 

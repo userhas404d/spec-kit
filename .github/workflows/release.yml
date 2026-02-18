@@ -2,12 +2,13 @@ name: Create Release
 
 on:
   push:
-    branches: [ main ]
+    branches: [ main, worktrunk ]
     paths:
       - 'memory/**'
       - 'scripts/**'
       - 'templates/**'
       - '.github/workflows/**'
+      - 'src/**'
   workflow_dispatch:
 
 jobs:
