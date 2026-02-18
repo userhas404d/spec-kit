@@ -24,12 +24,12 @@ jobs:
         with:
           fetch-depth: 0
           token: ${{ secrets.SYNC_TOKEN }}
-          # Fetch all branches so we can work with both main and worktrunk
-          ref: main
+          # Checkout worktrunk (default branch) so workflow scripts are available
+          ref: worktrunk
 
-      - name: Fetch worktrunk branch
+      - name: Fetch main branch
         run: |
-          git fetch origin worktrunk:worktrunk
+          git fetch origin main:main
 
       - name: Configure git identity
         run: |
