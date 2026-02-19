@@ -1,0 +1,8 @@
+# Worktrunk project hooks for Spec-Driven Development
+# See https://worktrunk.dev/hook/ for documentation
+
+[post-create]
+vscode = "code {{ worktree_path }}"
+
+[post-switch]
+uv = "leo-assume teleport-prod && leo-assume codeartifact uv && leo-assume codeartifact npm"
