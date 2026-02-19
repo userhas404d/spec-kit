@@ -151,7 +151,14 @@ build_variant() {
     esac
   fi
   
-  [[ -d templates ]] && { mkdir -p "$SPEC_DIR/templates"; find templates -type f -not -path "templates/commands/*" -not -name "vscode-settings.json" -exec cp --parents {} "$SPEC_DIR"/ \; ; echo "Copied templates -> .specify/templates"; }
+  [[ -d templates ]] && { mkdir -p "$SPEC_DIR/templates"; find templates -type f -not -path "templates/commands/*" -not -name "vscode-settings.json" -not -name "wt-config.toml" -exec cp --parents {} "$SPEC_DIR"/ \; ; echo "Copied templates -> .specify/templates"; }
+
+  # Ship Worktrunk project hooks for worktree-based development
+  if [[ -f templates/wt-config.toml ]]; then
+    mkdir -p "$base_dir/.config"
+    cp templates/wt-config.toml "$base_dir/.config/wt.toml"
+    echo "Copied templates/wt-config.toml -> .config/wt.toml"
+  fi
   
   # NOTE: We substitute {ARGS} internally. Outward tokens differ intentionally:
   #   * Markdown/prompt (claude, copilot, cursor-agent, opencode): $ARGUMENTS

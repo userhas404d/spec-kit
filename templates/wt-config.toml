@@ -1,0 +1,19 @@
+# Worktrunk project hooks for Spec-Driven Development
+# See https://worktrunk.dev/hook/ for documentation
+#
+# Template variables available in hook commands:
+#   {{ worktree_path }}  - Full path to the new worktree
+#   {{ branch }}         - Branch name
+#   {{ base_branch }}    - Base branch the worktree was created from
+#
+# Hook types:
+#   [post-create]  - Runs after worktree creation (blocking)
+#   [post-switch]  - Runs after switching to a worktree
+#   [post-start]   - Runs after worktree creation (background)
+#   [pre-merge]    - Runs before merging a worktree
+#   [post-merge]   - Runs after merging a worktree
+#   [pre-remove]   - Runs before removing a worktree
+#   [post-remove]  - Runs after removing a worktree
+
+[post-create]
+vscode = "code {{ worktree_path }}"
