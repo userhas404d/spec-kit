@@ -328,20 +328,18 @@ Our research and experimentation focus on:
 
 If you encounter issues with an agent, please open an issue so we can refine the integration.
 
-### Recommended Worktrunk Hooks
+### Worktrunk Hooks
 
-Spec Kit uses [Worktrunk](https://worktrunk.dev) for worktree-based feature development. You can optionally configure project-level hooks in `.config/wt.toml` to automate common tasks:
+`specify init` ships a default `.config/wt.toml` that automatically opens VS Code when a new worktree is created:
 
 ```toml
-[hooks]
-# Run dependency installation when creating a new worktree
-post-create = "uv sync"
-
-# Run test suite before merging a feature
-pre-merge = "uv run pytest"
+[post-create]
+vscode = "code {{ worktree_path }}"
 ```
 
-Spec Kit does not auto-generate this file; configure it to suit your project's needs.
+> **Note:** The default configuration assumes **VS Code** as the IDE. If you use a different editor, update the `post-create` hook command accordingly (e.g., `cursor {{ worktree_path }}` for Cursor, `zed {{ worktree_path }}` for Zed).
+
+You can extend `.config/wt.toml` with additional hooks to suit your project's needs. See [worktrunk.dev/hook](https://worktrunk.dev/hook/) for full documentation.
 
 ## 📖 Learn More
 

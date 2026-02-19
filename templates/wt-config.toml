@@ -1,6 +1,12 @@
 # Worktrunk project hooks for Spec-Driven Development
 # See https://worktrunk.dev/hook/ for documentation
 #
+# NOTE: The default post-create hook assumes VS Code as the IDE.
+# If you use a different editor, update the command below:
+#   Cursor:  cursor {{ worktree_path }}
+#   Zed:     zed {{ worktree_path }}
+#   Neovim:  nvim {{ worktree_path }}
+#
 # Template variables available in hook commands:
 #   {{ worktree_path }}  - Full path to the new worktree
 #   {{ branch }}         - Branch name

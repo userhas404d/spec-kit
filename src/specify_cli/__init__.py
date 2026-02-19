@@ -1299,8 +1299,16 @@ def init(
 
     if not check_tool("wt"):
         console.print(
-            "[yellow]Worktrunk (wt) not found - install from https://worktrunk.dev for worktree-based feature development[/yellow]"
+            Panel(
+                "[cyan]wt[/cyan] not found\n"
+                "Install from: [cyan]https://worktrunk.dev[/cyan]\n\n"
+                "Worktrunk is required for worktree-based feature development.\n"
+                "Install it, then re-run [cyan]specify init[/cyan].",
+                title="[red]Worktrunk Not Found[/red]",
+                border_style="red",
+            )
         )
+        raise typer.Exit(1)
 
     if ai_assistant:
         if ai_assistant not in AGENT_CONFIG:

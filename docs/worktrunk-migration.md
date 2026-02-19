@@ -48,7 +48,7 @@ With Worktrunk handling cross-platform concerns as a compiled Rust binary, maint
 | `--script` option removed  | No longer needed (always `sh`)                                    |
 | Script type picker removed | Interactive selection of `sh`/`ps` eliminated from `specify init` |
 | `wt` check added           | `specify check` now reports Worktrunk availability                |
-| `wt` warning added         | `specify init` warns if `wt` is not installed                     |
+| `wt` required              | `specify init` errors and exits if `wt` is not installed          |
 
 ### Command Templates
 
@@ -77,14 +77,15 @@ wt config shell install
 
 See [worktrunk.dev](https://worktrunk.dev) for other installation methods.
 
-## Optional: Project Hooks
+## Project Hooks
 
-Configure `.config/wt.toml` in your project root to automate common tasks:
+`specify init` now ships a default `.config/wt.toml` that opens VS Code when a new worktree is created:
 
 ```toml
-[hooks]
-post-create = "uv sync"
-pre-merge = "uv run pytest"
+[post-create]
+vscode = "code {{ worktree_path }}"
 ```
 
-Spec Kit does not auto-generate this file — configure it to suit your needs.
+> **Note:** The default configuration assumes VS Code as the IDE. If you use a different editor, update the `post-create` hook command accordingly (e.g., `cursor {{ worktree_path }}` for Cursor, `zed {{ worktree_path }}` for Zed).
+
+You can extend `.config/wt.toml` with additional hooks to suit your project's needs. See [worktrunk.dev/hook](https://worktrunk.dev/hook/) for full documentation.
